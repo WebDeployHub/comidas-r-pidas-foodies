@@ -32,6 +32,15 @@
         .horizontal-scroll::-webkit-scrollbar { height: 8px; }
         .horizontal-scroll::-webkit-scrollbar-thumb { background: #e53e3e; border-radius: 4px; }
         .horizontal-scroll::-webkit-scrollbar-track { background: #333333; }
+        
+        /* Ajuste para que el texto de descripción no se corte abruptamente en móviles */
+        .item-description {
+            display: -webkit-box;
+            -webkit-line-clamp: 4; /* Limita la descripción a 4 líneas */
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
     </style>
 </head>
 <body class="antialiased">
@@ -39,75 +48,76 @@
     <!-- Navbar/Header Fijo y Llamativo -->
     <header class="sticky top-0 z-50 bg-black bg-opacity-90 shadow-2xl">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
-            <h1 class="text-3xl font-extrabold secondary-color tracking-wider uppercase">
+            <h1 class="text-xl sm:text-3xl font-extrabold secondary-color tracking-wider uppercase">
                 Foodies Sincelejo
             </h1>
-            <nav class="flex space-x-4 items-center">
-                <a href="#menu" class="text-white hover:secondary-color transition duration-300 font-medium">Carta</a>
-                <a href="#contacto" class="text-white hover:secondary-color transition duration-300 font-medium">Contacto</a>
+            <nav class="flex space-x-2 sm:space-x-4 items-center">
+                <a href="#menu" class="text-white hover:secondary-color transition duration-300 font-medium text-sm sm:text-base">Carta</a>
+                <a href="#contacto" class="text-white hover:secondary-color transition duration-300 font-medium text-sm sm:text-base">Contacto</a>
                 <!-- Botón de WhatsApp -->
-                <button onclick="goToWhatsApp()" class="primary-color text-white px-4 py-2 rounded-lg font-bold shadow-lg transform transition duration-300 hover:scale-105 hover-bg-red flex items-center">
+                <button onclick="goToWhatsApp()" class="primary-color text-white px-3 py-1 sm:px-4 sm:py-2 rounded-lg font-bold shadow-lg transform transition duration-300 hover:scale-105 hover-bg-red flex items-center text-sm sm:text-base">
                     <!-- Icono de WhatsApp (SVG simple) -->
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-1 sm:mr-2">
                         <path d="M5 20l1.5-6.5L18 5 5 20z"></path>
                         <path d="M19 19H5a2 2 0 01-2-2V7a2 2 0 012-2h14a2 2 0 012 2v10a2 2 0 01-2 2z"></path>
                     </svg>
-                    PIDE AHORA
+                    Pedir
                 </button>
             </nav>
         </div>
     </header>
 
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <!-- La clase principal ahora usa `w-full` en lugar de `max-w-7xl` en móviles para evitar problemas de ancho -->
+    <main class="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
 
-        <!-- Sección Principal (Hero) - MODIFICADA -->
-        <section id="hero" class="mb-20 text-center primary-color p-12 rounded-3xl shadow-2xl">
-            <p class="text-lg font-semibold text-white mb-4">¡Bienvenidos a</p>
-            <h2 class="text-6xl sm:text-7xl font-black text-white leading-tight mb-6">
+        <!-- Sección Principal (Hero) -->
+        <section id="hero" class="mb-16 text-center primary-color p-8 sm:p-12 rounded-3xl shadow-2xl">
+            <p class="text-md sm:text-lg font-semibold text-white mb-2 sm:mb-4">¡Bienvenidos a</p>
+            <h2 class="text-5xl sm:text-7xl font-black text-white leading-tight mb-4 sm:mb-6">
                 <span class="secondary-color block sm:inline-block">FOODIES</span>
             </h2>
-            <p class="text-xl text-white font-light max-w-3xl mx-auto">
+            <p class="text-base sm:text-xl text-white font-light max-w-3xl mx-auto">
                 Descubre nuestra selección de hamburguesas, perros calientes, salchipapas y mucho más. Todo preparado con los mejores ingredientes y el mejor toque.
             </p>
-            <!-- NOTA ELIMINADA -->
         </section>
 
         <!-- Sección de la Carta (Menú) -->
-        <section id="menu" class="mb-20">
-            <h3 class="text-4xl font-bold text-center mb-12 secondary-color border-b-4 border-secondary pb-3 inline-block mx-auto uppercase tracking-wider">
+        <section id="menu" class="mb-16">
+            <h3 class="text-3xl sm:text-4xl font-bold text-center mb-10 secondary-color border-b-4 border-secondary pb-3 inline-block mx-auto uppercase tracking-wider">
                 Nuestra Carta
             </h3>
-            <div id="menu-container" class="space-y-16">
+            <div id="menu-container" class="space-y-12 sm:space-y-16">
                 <!-- El menú se renderizará aquí por JavaScript -->
             </div>
         </section>
 
         <!-- Sección de Contacto y Redes Sociales -->
-        <section id="contacto" class="py-16 bg-gray-800 rounded-2xl shadow-xl p-8 md:p-12">
-            <h3 class="text-3xl font-bold text-center mb-10 secondary-color">¿Dónde Encontrarnos y Contactarnos?</h3>
+        <section id="contacto" class="py-12 bg-gray-800 rounded-2xl shadow-xl p-6 md:p-12">
+            <h3 class="text-2xl sm:text-3xl font-bold text-center mb-8 secondary-color">¿Dónde Encontrarnos y Contactarnos?</h3>
             
-            <div class="grid md:grid-cols-2 gap-10">
+            <!-- Grid de 1 columna en móvil, 2 en desktop -->
+            <div class="grid md:grid-cols-2 gap-6 sm:gap-10">
                 
                 <!-- Dirección -->
-                <div class="flex flex-col items-center p-6 bg-gray-700 rounded-xl">
-                    <div class="primary-color p-3 rounded-full mb-4">
+                <div class="flex flex-col items-center p-4 sm:p-6 bg-gray-700 rounded-xl">
+                    <div class="primary-color p-3 rounded-full mb-3">
                         <!-- Icono de Mapa -->
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
                     </div>
                     <p class="text-lg font-semibold text-white mb-2">Nuestra Ubicación</p>
-                    <p class="text-gray-300 text-center">
+                    <p class="text-gray-300 text-center text-sm">
                         Crr 24w #4c -15<br>Sincelejo, Sucre
                     </p>
                 </div>
 
                 <!-- Escríbenos (WhatsApp) -->
-                <div class="flex flex-col items-center p-6 bg-gray-700 rounded-xl">
-                    <div class="primary-color p-3 rounded-full mb-4">
+                <div class="flex flex-col items-center p-4 sm:p-6 bg-gray-700 rounded-xl">
+                    <div class="primary-color p-3 rounded-full mb-3">
                         <!-- Icono de Chat -->
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
                     </div>
                     <p class="text-lg font-semibold text-white mb-2">Escríbenos y Haz tu Pedido</p>
-                    <button onclick="goToWhatsApp()" class="primary-color text-white px-6 py-3 rounded-lg font-bold shadow-lg transform transition duration-300 hover:scale-105 hover-bg-red mt-3">
+                    <button onclick="goToWhatsApp()" class="primary-color text-white px-5 py-2 rounded-lg font-bold shadow-lg transform transition duration-300 hover:scale-105 hover-bg-red mt-3 text-sm">
                         Abrir Chat de WhatsApp
                     </button>
                     <p class="text-sm text-gray-400 mt-2">Teléfono: 312 686 1354</p>
@@ -115,10 +125,10 @@
             </div>
             
             <!-- Instagram Link -->
-            <div class="mt-12 text-center">
-                <a href="https://www.instagram.com/foodiessincelejooficial?igsh=MTJudG9yN3FyYWtzdw==" target="_blank" rel="noopener noreferrer" class="inline-flex items-center text-xl secondary-color hover:text-white transition duration-300 p-3 rounded-full border border-secondary hover:border-white">
+            <div class="mt-10 text-center">
+                <a href="https://www.instagram.com/foodiessincelejooficial?igsh=MTJudG9yN3FyYWtzdw==" target="_blank" rel="noopener noreferrer" class="inline-flex items-center text-lg sm:text-xl secondary-color hover:text-white transition duration-300 p-3 rounded-full border border-secondary hover:border-white">
                     <!-- Icono de Instagram (SVG) -->
-                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2">
                         <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" x2="17.5" y1="6.5" y2="6.5"></line>
                     </svg>
                     Síguenos en Instagram
@@ -128,7 +138,7 @@
 
     </main>
 
-    <footer class="text-center py-6 bg-black text-gray-400">
+    <footer class="text-center py-6 bg-black text-gray-400 text-sm">
         <p>&copy; 2024 Foodies Sincelejo. Todos los derechos reservados.</p>
     </footer>
 
@@ -221,41 +231,41 @@
 
             for (const category in menu) {
                 const categoryElement = document.createElement('div');
-                categoryElement.className = 'category-section p-6 rounded-xl bg-gray-800 shadow-2xl';
+                categoryElement.className = 'category-section p-4 sm:p-6 rounded-xl bg-gray-800 shadow-2xl';
                 
                 // Título de la Categoría
                 categoryElement.innerHTML = `
-                    <h4 class="text-3xl font-extrabold primary-color mb-6 border-b-2 border-secondary pb-2 uppercase tracking-wide">
+                    <h4 class="text-2xl sm:text-3xl font-extrabold primary-color mb-4 sm:mb-6 border-b-2 border-secondary pb-2 uppercase tracking-wide">
                         ${category}
                     </h4>
                 `;
                 
                 // Contenedor de Items (Flexbox con Scroll Horizontal y Snap)
                 const itemsGrid = document.createElement('div');
-                itemsGrid.className = 'flex overflow-x-scroll space-x-6 horizontal-scroll snap-x snap-mandatory';
+                itemsGrid.className = 'flex overflow-x-scroll space-x-4 sm:space-x-6 horizontal-scroll snap-x snap-mandatory pb-4'; // Añadido pb-4 para espacio inferior
 
                 menu[category].forEach(item => {
                     // --- Estilo Resaltado para Gratinada y Precio ---
                     const priceGratinado = item.gratinadoPrice ? 
-                        // **CAMBIO:** Aumentamos el grosor del borde (border-l-4) y la opacidad del fondo (bg-yellow-900/50)
+                        // Utilizamos border-l-4 y bg-yellow-900/50 para mayor visibilidad
                         `<div class="mt-3 py-2 px-3 bg-yellow-900/50 rounded-lg border-l-4 border-secondary shadow-inner flex justify-between items-center">
                             <span class="text-sm text-yellow-300 font-black uppercase tracking-wider">Gratinada: </span>
                             <span class="text-xl font-black text-white">$${formatPrice(item.gratinadoPrice)}</span>
                         </div>` : 
-                        // El espacio invisible también se ajusta para mantener el layout (h-[46px] vs h-[58px] anterior)
+                        // El espacio invisible mantiene la altura para ítems sin gratinar
                         '<div class="mt-3 p-3 invisible h-[46px]"></div>'; 
 
                     const itemElement = document.createElement('div');
-                    // w-full on mobile, w-[calc(50%-0.75rem)] on medium screens to show ~2 items
-                    itemElement.className = 'menu-item flex-none w-[85vw] sm:w-[calc(50%-0.75rem)] bg-gray-700 rounded-xl transition duration-300 hover:bg-gray-600 transform hover:scale-[1.01] border border-gray-600 hover:border-secondary shadow-md snap-start p-4';
+                    // **CORRECCIÓN:** Usamos w-[90vw] en móviles y sm:w-[calc(50%-0.75rem)] en pantallas medianas
+                    itemElement.className = 'menu-item flex-none w-[90vw] sm:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-0.75rem)] bg-gray-700 rounded-xl transition duration-300 hover:bg-gray-600 transform hover:scale-[1.01] border border-gray-600 hover:border-secondary shadow-md snap-start p-4';
                     
                     itemElement.innerHTML = `
                         <div class="flex justify-between items-start mb-2">
-                            <h5 class="text-xl font-bold secondary-color leading-tight">${item.name}</h5>
-                            <span class="text-2xl font-black text-white primary-color px-3 py-1 rounded-full">$${formatPrice(item.basePrice)}</span>
+                            <h5 class="text-lg font-bold secondary-color leading-tight">${item.name}</h5>
+                            <span class="text-xl font-black text-white primary-color px-2 py-0.5 rounded-full">$${formatPrice(item.basePrice)}</span>
                         </div>
-                        <!-- Altura fija h-[6rem] para mantener la caja de Gratinada estable -->
-                        <p class="text-gray-300 text-sm font-semibold italic mb-3 h-[6rem] overflow-hidden">${item.description}</p>
+                        <!-- Clase 'item-description' para limitar las líneas en móvil -->
+                        <p class="text-gray-300 text-xs sm:text-sm font-semibold italic mb-3 h-auto item-description">${item.description}</p>
                         ${priceGratinado}
                     `;
                     itemsGrid.appendChild(itemElement);
@@ -269,7 +279,7 @@
         // --- 4. Función de WhatsApp ---
         function goToWhatsApp() {
             const phoneNumber = '573126861354'; 
-            // NUEVO MENSAJE AUTOMÁTICO MÁS AMIGABLE
+            // Mensaje automático
             const newMessage = "Hola Foodies, me gustaría hacer un pedido. ¿Qué delicias del menú de la web me recomiendas hoy?";
             const message = encodeURIComponent(newMessage);
             const whatsappUrl = `https://wa.me/${phoneNumber}?text=${message}`;
