@@ -65,3 +65,64 @@ body {
         grid-template-columns: 1fr;
     }
 }
+
+/* ----------------------------------------- */
+/* Reglas para controlar tamaño de imágenes */
+/* Uso recomendado: añadir una clase a la etiqueta <img>
+   Ejemplos: <img src="..." class="img-small"> */
+
+/* Asegura que las imágenes no desborden su contenedor */
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Utilidades de tamaño (puedes ajustarlas) */
+.img-small {
+    width: 150px; /* tamaño fijo útil para iconos/miniaturas */
+    max-width: 30%;
+    height: auto;
+}
+.img-medium {
+    width: 300px; /* tamaño intermedio */
+    max-width: 60%;
+    height: auto;
+}
+.img-large {
+    width: 100%; /* ocupar ancho del contenedor */
+    height: auto;
+}
+
+/* Reglas específicas para el slider que hay en `index.html` */
+#slider img {
+    width: 100%;
+    height: 400px; /* altura por defecto para escritorio */
+    object-fit: cover; /* recorta manteniendo proporciones */
+}
+
+/* Altura menor en móviles para evitar que ocupe tanto espacio */
+@media (max-width: 640px) {
+    #slider img {
+        height: 220px;
+    }
+}
+
+/* Si quieres forzar una imagen con proporciones fijas (ej. 16:9),
+   usa una clase helper y object-fit según necesites */
+.img-16-9 {
+    width: 100%;
+    height: 0;
+    padding-top: 56.25%; /* 16:9 */
+    position: relative;
+}
+.img-16-9 > img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Fin de reglas de imagen */

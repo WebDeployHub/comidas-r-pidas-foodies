@@ -41,6 +41,23 @@
             overflow: hidden;
             text-overflow: ellipsis;
         }
+
+        /*
+        * CAMBIO CRÍTICO PARA EL SLIDER:
+        * Asegura que el contenedor tenga una relación de aspecto fija (ej: 4:3) 
+        * Y que las imágenes usen 'object-contain' para caber completamente.
+        */
+        .slider-container {
+            /* 4/3 Aspect Ratio: 75% de la altura respecto al ancho */
+            aspect-ratio: 4 / 3; 
+            height: auto !important; /* Permitimos que la altura se ajuste por el aspecto */
+        }
+        .slider-image {
+            /* object-contain: Escala la imagen para que quepa completamente dentro del contenedor */
+            object-fit: contain; 
+            /* Fondo del slider, visible si la imagen no llena el contenedor */
+            background-color: #333333; 
+        }
     </style>
 </head>
 <body class="antialiased">
@@ -48,15 +65,15 @@
     <!-- Navbar/Header Fijo y Llamativo -->
     <header class="sticky top-0 z-50 bg-black bg-opacity-90 shadow-2xl">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
-            <h1 class="text-xl sm:text-3xl font-extrabold secondary-color tracking-wider uppercase">
+            <h1 class="text -3xl sm:text-4xl font-extrabold secondary-color tracking-wider uppercase">
                 Foodies Sincelejo
             </h1>
             <nav class="flex space-x-2 sm:space-x-4 items-center">
                 <a href="#menu" class="text-white hover:secondary-color transition duration-300 font-medium text-sm sm:text-base">Carta</a>
                 <a href="#contacto" class="text-white hover:secondary-color transition duration-300 font-medium text-sm sm:text-base">Contacto</a>
                 <!-- Botón de WhatsApp -->
-                <button onclick="goToWhatsApp()" class="primary-color text-white px-3 py-1 sm:px-4 sm:py-2 rounded-lg font-bold shadow-lg transform transition duration-300 hover:scale-105 hover-bg-red flex items-center text-sm sm:text-base">
-                    <!-- Icono de WhatsApp (SVG simple) -->
+                <button onclick="goToWhatsApp()" class="primary-color text-white px-3 py-1 sm:px-4 sm:py-2 rounded-lg font-bold shadow-lg transform transition duration-300 hover:scale-105 hover-bg-red flex items-center text-sm sm:text-base" aria-label="Pedir por WhatsApp">
+                    <!-- Icono de Chat/Pedir (SVG simple) -->
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-1 sm:mr-2">
                         <path d="M5 20l1.5-6.5L18 5 5 20z"></path>
                         <path d="M19 19H5a2 2 0 01-2-2V7a2 2 0 012-2h14a2 2 0 012 2v10a2 2 0 01-2 2z"></path>
@@ -67,7 +84,6 @@
         </div>
     </header>
 
-    <!-- La clase principal ahora usa `w-full` en lugar de `max-w-7xl` en móviles para evitar problemas de ancho -->
     <main class="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
 
         <!-- Sección Principal (Hero) -->
@@ -86,6 +102,42 @@
             <h3 class="text-3xl sm:text-4xl font-bold text-center mb-10 secondary-color border-b-4 border-secondary pb-3 inline-block mx-auto uppercase tracking-wider">
                 Nuestra Carta
             </h3>
+            
+            <!-- Slider de imágenes (ACTUALIZADO) -->
+            <div class="slider-container w-full overflow-hidden relative 
+                         h-[260px]    /* teléfonos pequeños */
+                         sm:h-[320px] /* teléfonos normales */
+                         md:h-[380px] /* tablets pequeñas */
+                         lg:h-[420px] /* pantallas más grandes */
+                         xl:h-[480px] /* pantallas extra grandes */">
+
+
+                <!-- flex-nowrap asegura que las imágenes permanezcan en línea horizontal -->
+               <div id="slider" class="slider-track flex transition-transform duration-500 ease-in-out">
+                    <!-- Usamos PLACEHOLDERs para que el código sea funcional y se vea bien. -->
+                    <img src="recursos/Principal.jpg" alt="Hamburguesa Premium Foodies" class="w-full h-full object-cover flex-shrink-0" />
+                    <img src="recursos/asados1.jpeg" alt="Perro Caliente Especial Foodies" class="w-full h-full object-cover flex-shrink-0" />
+                    <img src="recursos/asado2.jpg" alt="Salchipapa Mix Foodies" class="w-full h-full object-cover flex-shrink-0" />
+                    <img src="recursos/asados3.jpg" alt="Asados y Picadas Foodies" class="w-full h-full object-cover flex-shrink-0" />
+                    <img src="recursos/pruebaF.jpeg" alt="Asados y Picadas Foodies" class="w-full h-full object-cover flex-shrink-0" />
+                    <img src="recursos/bandeja.jpg" alt="Asados y Picadas Foodies" class="w-full h-full object-cover flex-shrink-0" />
+                    <img src="recursos/guacamole.jpg" alt="Asados y Picadas Foodies" class="w-full h-full object-cover flex-shrink-0" />
+                    <img src="recursos/picada.jpg" alt="Asados y Picadas Foodies" class="w-full h-full object-cover flex-shrink-0" />
+                    <img src="recursos/gratinada.jpg" alt="Asados y Picadas Foodies" class="w-full h-full object-cover flex-shrink-0" />
+                    
+                </div>
+
+                <!-- Botones de navegación -->
+                <button id="prev" class="absolute left-2 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full transition duration-200 shadow-xl" aria-label="Anterior">
+                    <!-- SVG flecha izquierda -->
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+                </button>
+                <button id="next" class="absolute right-2 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full transition duration-200 shadow-xl" aria-label="Siguiente">
+                    <!-- SVG flecha derecha -->
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+                </button>
+            </div>
+
             <div id="menu-container" class="space-y-12 sm:space-y-16">
                 <!-- El menú se renderizará aquí por JavaScript -->
             </div>
@@ -120,7 +172,7 @@
                     <button onclick="goToWhatsApp()" class="primary-color text-white px-5 py-2 rounded-lg font-bold shadow-lg transform transition duration-300 hover:scale-105 hover-bg-red mt-3 text-sm">
                         Abrir Chat de WhatsApp
                     </button>
-                    <p class="text-sm text-gray-400 mt-2">Teléfono: 312 686 1354</p>
+                    <p class="text-sm text-gray-400 mt-2">Teléfono: 3127961987</p>
                 </div>
             </div>
             
@@ -155,53 +207,43 @@
         }
 
         const menuData = [
-            // Hamburguesas (Ordenadas por precio base: 12, 16, 20, 25, 28)
-            { category: "Hamburguesas", name: "Hamburguesa sencilla", basePrice: 12 * priceMultiplier, gratinadoPrice: 16 * priceMultiplier, description: "Carne de la casa, tocineta caramelizada, ripio, lechuga, salsa rosada, salsa de pimentón, salsa tártara" },
-            { category: "Hamburguesas", name: "Hamburguesa de pollo", basePrice: 16 * priceMultiplier, gratinadoPrice: 20 * priceMultiplier, description: "Pollo apanado, tocineta caramelizada, ripio, lechuga, salsa rosada, salsa de pimentón, salsa tártara" },
-            { category: "Hamburguesas", name: "Chicken Burger", basePrice: 20 * priceMultiplier, gratinadoPrice: 24 * priceMultiplier, description: "Carne de la casa, pollo apanado, tocineta, papa ripio, lechuga, salsa de tocineta, queso mozzarella, queso cheddar, salsa rosada, salsa de pimentón, salsa tártara." },
-            { category: "Hamburguesas", name: "Kimburger", basePrice: 25 * priceMultiplier, gratinadoPrice: 29 * priceMultiplier, description: "Carne de la casa, cerdo, ranchera, papa ripio, queso mozzarella, tocineta caramelizada, salsa tártara, salsa rosada y salsa de pimentón" },
-            { category: "Hamburguesas", name: "Mix Burger", basePrice: 28 * priceMultiplier, gratinadoPrice: 32 * priceMultiplier, description: "Carne de la casa, pollo apanado, cerdo, ranchera, tocineta, tocineta caramelizada, papa ripio, queso mozzarella, salsa tártara, salsas de pimentón, salsa rosada" },
+            // ⭐ HAMBURGUESAS (ordenadas por precio)
+    { category: "Hamburguesas", name: "Burger Clásica", basePrice: 16 * priceMultiplier, gratinadoPrice: null, description: "Carne de res artesanal, lechuga crespa, tomate verde, cebolla caramelizada, salsas y papa a la francesa." },
+    { category: "Hamburguesas", name: "Burger de Pollo", basePrice: 18 * priceMultiplier, gratinadoPrice: null, description: "Pollo apanado, tocineta caramelizada, ripio, lechuga, salsa rosada, salsa de pimentón, salsa tártara." },
+    { category: "Hamburguesas", name: "Guacamole Bacon Burger", basePrice: 20 * priceMultiplier, gratinadoPrice: null, description: "Carne de res artesanal, guacamole, tocineta, aderezo dulce de maíz, lechuga crespa, tomate, cebolla caramelizada, queso mozzarella y papa rizada a la francesa." },
+    { category: "Hamburguesas", name: "Burger Rings", basePrice: 21 * priceMultiplier, gratinadoPrice: null, description: "Doble carne de res, aros de cebolla, queso cheddar y mozzarella, tocineta, pepinillos, aderezo crema ahumada de leña y papas a la francesa." },
+    { category: "Hamburguesas", name: "Chicken Burger", basePrice: 22 * priceMultiplier, gratinadoPrice: null, description: "Carne de hamburguesa de la casa, pollo apanado, tocineta, papa ripio, lechuga, salsa de tocineta, queso mozzarella, queso cheddar, salsa rosada de la casa, salsa de pimentón, salsa tártara." },
+    { category: "Hamburguesas", name: "Queso Frito", basePrice: 23 * priceMultiplier, gratinadoPrice: null, description: "Carne de res artesanal, queso frito empanizado, cebolla caramelizada, salsa estrella de la casa, lechuga crespa, tomate, papas a la francesa." },
+    { category: "Hamburguesas", name: "La Vaca Mona", basePrice: 23 * priceMultiplier, gratinadoPrice: null, description: "150g de carne de res artesanal, mezcla de 3 quesos (mozzarella, cheddar, americano), tocineta, crema ahumada de leña y papas rizadas." },
+    { category: "Hamburguesas", name: "Western Bacon", basePrice: 23 * priceMultiplier, gratinadoPrice: null, description: "Doble carne de res artesanal, salsa BBQ, queso cheddar, cebolla caramelizada, tocineta, lechuga crespa, tomate y papas rizadas." },
+    { category: "Hamburguesas", name: "Kimburger", basePrice: 25 * priceMultiplier, gratinadoPrice: null, description: "Carne de la casa, cerdo, ranchera, papa ripio, queso mozzarella, tocineta caramelizada, salsa tártara, salsa rosada y salsa de pimentón." },
+    { category: "Hamburguesas", name: "Big Foodies", basePrice: 25 * priceMultiplier, gratinadoPrice: null, description: "Doble carne de res artesanal, salsa estrella de la casa, queso cheddar, cebolla caramelizada, tomate, lechuga crespa, pepinillos, tocineta y papas rizadas." },
+    { category: "Hamburguesas", name: "Mix Burger", basePrice: 28 * priceMultiplier, gratinadoPrice: null, description: "Carne de la casa, pollo apanado, cerdo, ranchera, tocineta, tocineta caramelizada, papa ripio, queso mozzarella, salsa tártara, salsa de pimentón y salsa rosada." },
 
-            // Perros (Ordenados por precio base: 7, 13, 16, 18, 22, 22, 25)
-            { category: "Perros", name: "Perro sencillo", basePrice: 7 * priceMultiplier, gratinadoPrice: 11 * priceMultiplier, description: "Salchicha, tártara, salsa rosada, salsa de pimentón, papa ripio, lechuga" },
-            { category: "Perros", name: "Polliperro", basePrice: 13 * priceMultiplier, gratinadoPrice: 17 * priceMultiplier, description: "Pollo, lechuga, papa ripio, salsa rosada de la casa, salsa tártara, salsa de pimentón" },
-            { category: "Perros", name: "Perro ranchero", basePrice: 16 * priceMultiplier, gratinadoPrice: 20 * priceMultiplier, description: "Ranchera, lechuga, papa ripio, salsa tártara, salsa de pimentón, salsa rosada" },
-            { category: "Perros", name: "Perro suizo", basePrice: 18 * priceMultiplier, gratinadoPrice: 22 * priceMultiplier, description: "Suiza, lechuga, papa ripio, salsa tártara, salsa de pimentón, salsa rosada" },
-            { category: "Perros", name: "Chick perro", basePrice: 22 * priceMultiplier, gratinadoPrice: 26 * priceMultiplier, description: "Pollo, tocineta, ranchera, papa ripio, lechuga, salsa tártara, salsa de pimentón" },
-            { category: "Perros", name: "Porciperro", basePrice: 22 * priceMultiplier, gratinadoPrice: 26 * priceMultiplier, description: "Lomito, ranchera, tocineta, lechuga, papa ripio, salsa tártara, salsa de pimentón, salsa rosada" },
-            { category: "Perros", name: "Mix perro", basePrice: 25 * priceMultiplier, gratinadoPrice: 29 * priceMultiplier, description: "Cerdo, pollo, suiza, tocineta, lechuga, salsa rosada de la casa, salsa tártara, salsa de pimentón" },
-            
-            // Salchipapas (Ordenadas por precio base: 13, 17, 17, 20, 25)
-            { category: "Salchipapas", name: "SENCILLA", basePrice: 13 * priceMultiplier, gratinadoPrice: 17 * priceMultiplier, description: "Salchicha sencilla, lechuga, ripio, queso costeño, salsa tártara, salsa rosada" },
-            { category: "Salchipapas", name: "Salchipapa chick", basePrice: 17 * priceMultiplier, gratinadoPrice: 21 * priceMultiplier, description: "Pollo, tocineta, ranchera lechuga, papa ripio, salsa tártara, salsa de pimentón, salsa rosada" },
-            { category: "Salchipapas", name: "Salchipapa grill", basePrice: 17 * priceMultiplier, gratinadoPrice: 21 * priceMultiplier, description: "Ranchera, tocineta, buty, lechuga, papa ripio, salsa tártara, salsa de pimentón, salsa rosada" },
-            { category: "Salchipapas", name: "Salchipapa mix", basePrice: 20 * priceMultiplier, gratinadoPrice: 24 * priceMultiplier, description: "Cerdo, pollo, suiza, lechuga, salsa rosada de la casa, salsa tártara, salsa de pimentón, ripio" },
-            { category: "Salchipapas", name: "Salchipapa la R", basePrice: 25 * priceMultiplier, gratinadoPrice: 29 * priceMultiplier, description: "Salchicha sencilla, Ranchera, tocineta, buty, suiza, chorizo ternera, lechuga, papa ripio, salsa tártara, salsa de pimentón, salsa rosada" },
+    // ⭐ PERROS CALIENTES
+    { category: "Perros", name: "Mexicano", basePrice: 15 * priceMultiplier, gratinadoPrice: null, description: "Salchicha Premium, aderezos de la casa, papa ripio, cebolla caramelizada, guacamole, mozzarella y tocineta." },
+    { category: "Perros", name: "Americano", basePrice: 15 * priceMultiplier, gratinadoPrice: null, description: "Salchicha americana, aderezos de la casa, papa ripio, cebolla caramelizada, queso cheddar, tocineta." },
+    { category: "Perros", name: "Suizo", basePrice: 16 * priceMultiplier, gratinadoPrice: null, description: "Salchicha suiza, aderezos de la casa, papa ripio, cebolla caramelizada, pepinillos, mozzarella y tocineta." },
+    { category: "Perros", name: "Perro Ranchero", basePrice: 16 * priceMultiplier, gratinadoPrice: null, description: "Ranchera, lechuga, papa ripio, salsa tártara, cebolla caramelizada, salsa de pimentón y salsa rosada." },
+    { category: "Perros", name: "Chick Perro", basePrice: 20 * priceMultiplier, gratinadoPrice: null, description: "Pollo, tocineta, ranchera, papa ripio, lechuga, cebolla caramelizada, salsa tártara y salsa de pimentón." },
+    { category: "Perros", name: "Mix Perro", basePrice: 22 * priceMultiplier, gratinadoPrice: null, description: "Cerdo, pollo, tocineta, ranchera, cebolla caramelizada, lechuga, salsa rosada de la casa, salsa tártara y salsa de pimentón." },
 
-            // Maduritos (Ordenadas por precio base: 20, 24, 26, 28)
-            { category: "Maduritos", name: "Madurito grill", basePrice: 20 * priceMultiplier, gratinadoPrice: 24 * priceMultiplier, description: "Ranchera, tocineta, buty, lechuga, papa ripio, salsa tártara, salsa de pimentón, salsa rosada" },
-            { category: "Maduritos", name: "Madurito la R", basePrice: 24 * priceMultiplier, gratinadoPrice: 28 * priceMultiplier, description: "Salchicha sencilla, Ranchera, tocineta, buty, suiza, chorizo ternera lechuga, papa ripio, salsa tártara, salsa de pimentón, salsa rosada" },
-            { category: "Maduritos", name: "Madurito chick", basePrice: 26 * priceMultiplier, gratinadoPrice: 30 * priceMultiplier, description: "Pollo, tocineta, ranchera lechuga, papa ripio, salsa tártara, salsa de pimentón, salsa rosada" },
-            { category: "Maduritos", name: "Madurito mix", basePrice: 28 * priceMultiplier, gratinadoPrice: 32 * priceMultiplier, description: "Cerdo, pollo, suiza, lechuga, salsa rosada de la casa, salsa tártara, salsa de pimentón, ripio" },
+    // ⭐ PICADAS
+    { category: "Picadas", name: "Cerdo", basePrice: 20 * priceMultiplier, gratinadoPrice: null, description: "Cerdo, chorizo de cerdo, papa cocida, chimichurri, salsa tártara y salsa de pimentón." },
+    { category: "Picadas", name: "Pollo", basePrice: 22 * priceMultiplier, gratinadoPrice: null, description: "Pollo, ranchera, papa cocida, chimichurri, salsa tártara y salsa de pimentón." },
+    { category: "Picadas", name: "Mixta", basePrice: 30 * priceMultiplier, gratinadoPrice: null, description: "Pollo, cerdo, chorizo de cerdo, ranchera, papa cocida, chimichurri, salsa tártara y salsa de pimentón." },
 
-            // Chorizitos (Ordenados por precio base: 12, 12, 15, 20)
-            { category: "Chorizitos", name: "Cerdo", basePrice: 12 * priceMultiplier, gratinadoPrice: null, description: "Papa cocida, yuca, chimichurri, salsa tártara, salsa de pimentón" },
-            { category: "Chorizitos", name: "Carne", basePrice: 12 * priceMultiplier, gratinadoPrice: null, description: "Papa cocida, yuca, chimichurri, salsa tártara, salsa de pimentón" },
-            { category: "Chorizitos", name: "Mixto", basePrice: 15 * priceMultiplier, gratinadoPrice: null, description: "Cerdo, carne, Papa cocida, yuca, chimichurri, salsa tártara, salsa de pimentón" },
-            { category: "Chorizitos", name: "Chorizo la R", basePrice: 20 * priceMultiplier, gratinadoPrice: null, description: "Cerdo, carne, suiza, buty, Papa cocida, yuca, chimichurri, salsa tártara, salsa de pimentón" },
+    // ⭐ ASADOS
+    { category: "Asados", name: "Chuleta", basePrice: 22 * priceMultiplier, gratinadoPrice: null, description: "Chuleta de cerdo." },
+    { category: "Asados", name: "Asado de Res", basePrice: 26 * priceMultiplier, gratinadoPrice: null, description: "Carne de res asada." },
+    { category: "Asados", name: "Asado de Pollo", basePrice: 26 * priceMultiplier, gratinadoPrice: null, description: "Pechuga o presa de pollo asada." },
+    { category: "Asados", name: "Asado de Cerdo", basePrice: 26 * priceMultiplier, gratinadoPrice: null, description: "Cerdo asado." },
 
-            // Asados (Ordenados por precio base: 22, 22, 26, 32)
-            { category: "Asados", name: "Cerdo", basePrice: 22 * priceMultiplier, gratinadoPrice: 26 * priceMultiplier, description: "Cerdo, Papa cocida, yuca, chimichurri, salsa tártara, salsa de pimentón" },
-            { category: "Asados", name: "Pechuga", basePrice: 22 * priceMultiplier, gratinadoPrice: 26 * priceMultiplier, description: "Pechuga, Papa cocida, yuca, chimichurri, salsa tártara, salsa de pimentón" },
-            { category: "Asados", name: "Chuleta", basePrice: 26 * priceMultiplier, gratinadoPrice: 30 * priceMultiplier, description: "Chuleta, Papa cocida, yuca, chimichurri, salsa tártara, salsa de pimentón" },
-            { category: "Asados", name: "Mixto", basePrice: 32 * priceMultiplier, gratinadoPrice: 36 * priceMultiplier, description: "Cerdo, pechuga, chorizo de cerdo, Papa cocida, yuca, chimichurri, salsa tártara, salsa de pimentón" },
-            
-            // Picadas (Ordenadas por precio base: 25, 25, 30, 50)
-            { category: "Picadas", name: "Cerdo", basePrice: 25 * priceMultiplier, gratinadoPrice: 29 * priceMultiplier, description: "Cerdo, chorizo de cerdo, Papa cocida, yuca, chimichurri, salsa tártara, salsa de pimentón" },
-            { category: "Picadas", name: "Pollo", basePrice: 25 * priceMultiplier, gratinadoPrice: 29 * priceMultiplier, description: "Pollo, ranchera, Papa cocida, yuca, chimichurri, salsa tártara, salsa de pimentón" },
-            { category: "Picadas", name: "Chuleta la R", basePrice: 30 * priceMultiplier, gratinadoPrice: 34 * priceMultiplier, description: "Chuleta, chorizo de cerdo, Papa cocida, yuca, chimichurri, salsa tártara, salsa de pimentón" },
-            { category: "Picadas", name: "Picada La R", basePrice: 50 * priceMultiplier, gratinadoPrice: 54 * priceMultiplier, description: "Pollo, cerdo, chorizo de cerdo y carne, Papa cocida, yuca, chimichurri, salsa tártara, salsa de pimentón" },
-        ];
+    // ⭐ CHORIZITOS
+    { category: "Chorizitos", name: "Porcichorizo", basePrice: 10 * priceMultiplier, gratinadoPrice: null, description: "Chorizo de cerdo, papa cocida, chimichurri y aderezos." },
+    { category: "Chorizitos", name: "Sencillo", basePrice: 7 * priceMultiplier, gratinadoPrice: null, description: "Chorizo de ternera, papa cocida, chimichurri y aderezos." },
+    { category: "Chorizitos", name: "Mixto", basePrice: 15 * priceMultiplier, gratinadoPrice: null, description: "Cerdo y ternera, papa cocida, chimichurri y aderezos." }
+];
 
         // --- 2. Función para Agrupar y Ordenar el Menú ---
         function getGroupedAndSortedMenu(data) {
@@ -242,7 +284,7 @@
                 
                 // Contenedor de Items (Flexbox con Scroll Horizontal y Snap)
                 const itemsGrid = document.createElement('div');
-                itemsGrid.className = 'flex overflow-x-scroll space-x-4 sm:space-x-6 horizontal-scroll snap-x snap-mandatory pb-4'; // Añadido pb-4 para espacio inferior
+                itemsGrid.className = 'flex overflow-x-scroll space-x-4 sm:space-x-6 horizontal-scroll snap-x snap-mandatory pb-4';
 
                 menu[category].forEach(item => {
                     // --- Estilo Resaltado para Gratinada y Precio ---
@@ -256,7 +298,7 @@
                         '<div class="mt-3 p-3 invisible h-[46px]"></div>'; 
 
                     const itemElement = document.createElement('div');
-                    // **CORRECCIÓN:** Usamos w-[90vw] en móviles y sm:w-[calc(50%-0.75rem)] en pantallas medianas
+                    // Usamos w-[90vw] en móviles y sm:w-[calc(50%-0.75rem)] en pantallas medianas
                     itemElement.className = 'menu-item flex-none w-[90vw] sm:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-0.75rem)] bg-gray-700 rounded-xl transition duration-300 hover:bg-gray-600 transform hover:scale-[1.01] border border-gray-600 hover:border-secondary shadow-md snap-start p-4';
                     
                     itemElement.innerHTML = `
@@ -278,26 +320,79 @@
 
         // --- 4. Función de WhatsApp ---
         function goToWhatsApp() {
-            const phoneNumber = '573126861354'; 
+            const phoneNumber = '573127961987'; 
             // Mensaje automático
-            const newMessage = "Hola Foodies, me gustaría hacer un pedido. ¿Qué delicias del menú de la web me recomiendas hoy?";
+            const newMessage = "Hola Foodies, me gustaría hacer un pedido.";
             const message = encodeURIComponent(newMessage);
             const whatsappUrl = `https://wa.me/${phoneNumber}?text=${message}`;
             window.open(whatsappUrl, '_blank');
         }
 
-        // Iniciar el renderizado del menú al cargar la página
+        // --- 5. Lógica del Slider (Carousel) ---
+        const slider = document.getElementById('slider');
+        const prevButton = document.getElementById('prev');
+        const nextButton = document.getElementById('next');
+        let index = 0;
+        let totalSlides = 0;
+        let slideInterval;
+
+        function initializeSlider() {
+             if (slider) {
+                totalSlides = slider.children.length;
+                if (totalSlides > 0) {
+                    updateSlider();
+                    // Iniciar el carrusel automático
+                    startAutoSlide();
+                }
+             }
+        }
+
+        function updateSlider() {
+            // Se calcula el desplazamiento en porcentaje
+            slider.style.transform = `translateX(-${index * 100}%)`;
+        }
+
+        function nextSlide() {
+            index = (index + 1) % totalSlides;
+            updateSlider();
+        }
+
+        function prevSlide() {
+            index = (index - 1 + totalSlides) % totalSlides;
+            updateSlider();
+        }
+
+        function startAutoSlide() {
+            // Limpia el intervalo previo para evitar duplicados
+            clearInterval(slideInterval); 
+            // Cambia la imagen cada 5 segundos
+            slideInterval = setInterval(nextSlide, 5000); 
+        }
+        
+        // Asignar eventos a los botones
+        if (nextButton) nextButton.onclick = () => { nextSlide(); startAutoSlide(); };
+        if (prevButton) prevButton.onclick = () => { prevSlide(); startAutoSlide(); };
+
+        // Iniciar el renderizado del menú y el slider al cargar la página
         window.onload = () => {
             renderMenu();
+            initializeSlider();
         };
 
         // Simula la función para hacer que el scroll sea suave al hacer click en los enlaces del navbar
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
+                // Usamos una pequeña función de retardo para asegurar que el scroll funcione correctamente en móviles
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                     setTimeout(() => {
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                     }, 100);
+                }
             });
         });
 
