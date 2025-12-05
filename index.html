@@ -229,21 +229,21 @@
 
 
     // ⭐ PICADAS
-    { category: "Picadas", name: "Cerdo", basePrice: 20 * priceMultiplier, gratinadoPrice: null, description: "Cerdo, chorizo de cerdo, papa cocida, chimichurri, salsa tártara y aderezo de pimentón." },
-    { category: "Picadas", name: "Pollo", basePrice: 22 * priceMultiplier, gratinadoPrice: null, description: "Pollo, ranchera, papa cocida, chimichurri, salsa tártara y aderezo de pimentón." },
-    { category: "Picadas", name: "Mixta", basePrice: 30 * priceMultiplier, gratinadoPrice: null, description: "Pollo, cerdo, chorizo de cerdo, ranchera, papa cocida, chimichurri, salsa tártara y aderezo de pimentón." },
+    { category: "Picadas", name: "Cerdo", basePrice: 20 * priceMultiplier, gratinadoPrice: null, description: "Cerdo, chorizo de cerdo, chimichurri, salsa tártara y aderezo de pimentón." },
+    { category: "Picadas", name: "Pollo", basePrice: 22 * priceMultiplier, gratinadoPrice: null, description: "Pollo, ranchera, chimichurri, salsa tártara y aderezo de pimentón." },
+    { category: "Picadas", name: "Mixta", basePrice: 30 * priceMultiplier, gratinadoPrice: null, description: "Pollo, cerdo, chorizo de cerdo, ranchera, chimichurri, salsa tártara y aderezo de pimentón." },
 
     // ⭐ CHORIZITOS
-    { category: "Chorizitos", name: "Porcichorizo", basePrice: 10 * priceMultiplier, gratinadoPrice: null, description: "Chorizo de cerdo, papa cocida, chimichurri y aderezos." },
-    { category: "Chorizitos", name: "Sencillo", basePrice: 7 * priceMultiplier, gratinadoPrice: null, description: "Chorizo, papa cocida, chimichurri y aderezos." },
-    { category: "Chorizitos", name: "Mixto", basePrice: 15 * priceMultiplier, gratinadoPrice: null, description: "Cerdo, chorizo, ranchera, papa cocida, chimichurri y aderezos." },
+    { category: "Chorizitos", name: "Porcichorizo", basePrice: 10 * priceMultiplier, gratinadoPrice: null, description: "Chorizo de cerdo, chimichurri y aderezos." },
+    { category: "Chorizitos", name: "Sencillo", basePrice: 7 * priceMultiplier, gratinadoPrice: null, description: "Chorizo, chimichurri y aderezos." },
+    { category: "Chorizitos", name: "Mixto", basePrice: 15 * priceMultiplier, gratinadoPrice: null, description: "Cerdo, chorizo, ranchera, chimichurri y aderezos." },
 
 
     // ⭐ ASADOS
-    { category: "Asados", name: "Chuleta", basePrice: 22 * priceMultiplier, gratinadoPrice: null, description: "Chuleta de cerdo, ensalada de la casa, papa cocida, chimichurri y aderezos de la casa." },
-    { category: "Asados", name: "Asado de Res", basePrice: 26 * priceMultiplier, gratinadoPrice: null, description: "Carne de res asada, ensalada de la casa, papa cocida, chimichurri y aderezos de la casa." },
-    { category: "Asados", name: "Asado de Pollo", basePrice: 26 * priceMultiplier, gratinadoPrice: null, description: "Pechuga o presa de pollo asada, ensalada de la casa, papa cocida, chimichurri y aderezos de la casa." },
-    { category: "Asados", name: "Asado de Cerdo", basePrice: 26 * priceMultiplier, gratinadoPrice: null, description: "Cerdo asado, ensalada de la casa, papa cocida, chimichurri y aderezos de la casa." }
+    { category: "Asados", name: "Chuleta", basePrice: 22 * priceMultiplier, gratinadoPrice: null, description: "Chuleta de cerdo, ensalada de la casa, chimichurri y aderezos de la casa." },
+    { category: "Asados", name: "Asado de Res", basePrice: 26 * priceMultiplier, gratinadoPrice: null, description: "Carne de res asada, ensalada de la casa, chimichurri y aderezos de la casa." },
+    { category: "Asados", name: "Asado de Pollo", basePrice: 26 * priceMultiplier, gratinadoPrice: null, description: "Pechuga o presa de pollo asada, ensalada de la casa, chimichurri y aderezos de la casa." },
+    { category: "Asados", name: "Asado de Cerdo", basePrice: 26 * priceMultiplier, gratinadoPrice: null, description: "Cerdo asado, ensalada de la casa, chimichurri y aderezos de la casa." }
 
     
 ];
@@ -307,7 +307,7 @@ function renderMenu() {
     
                 
                 
-            } else if (item.category === 'Chorizitos' || item.category === 'Picadas') {
+            } else if (item.category === 'Chorizitos' || item.category === 'Picadas' || item.category === 'Asados') {
                 papasFrancesaTag = `
                     <div class="mt-3 py-1 px-2 bg-black/40 rounded-lg border border-secondary shadow-lg w-fit">
                         <p class="secondary-color text-xs sm:text-sm font-extrabold tracking-wider uppercase text-left">
